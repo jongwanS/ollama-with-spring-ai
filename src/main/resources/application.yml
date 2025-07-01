@@ -1,6 +1,14 @@
 spring:
   ai:
     ollama:
-      base-url: http://localhost:11434
+      base-url: http://localhost:11434  # Ollama 서버 실행 중이어야 함
       chat:
-        model: llama3.2
+        model: llama3.2  # 설치된 모델 이름 (예: llama3, mistral, phi)
+#spring:
+#  ai:
+#    ollama:
+#      base-url: http://localhost:11434
+#      chat:
+#        options:
+#          model: gemma3:4b
+#          temperature: 0.7
