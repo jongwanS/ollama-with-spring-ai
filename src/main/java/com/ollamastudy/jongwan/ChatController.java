@@ -2,6 +2,7 @@ package com.ollamastudy.jongwan;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,11 +16,8 @@ public class ChatController {
 
     private final ChatClient chatClient;
 
-    public ChatController(ChatClient.Builder chatClientBuilder) {
-        this.chatClient = chatClientBuilder
-                .defaultSystem("You are an English tutor. Your job is to help a Korean student improve their English."+
-                        "Correct the following sentence and give a brief explanation if needed.")
-                .build();
+    public ChatController(@Qualifier("meanChatClient") ChatClient chatClient) {
+        this.chatClient = chatClient;
     }
 
     @PostMapping
