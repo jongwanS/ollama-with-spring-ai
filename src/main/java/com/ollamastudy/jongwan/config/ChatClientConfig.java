@@ -1,4 +1,4 @@
-package com.ollamastudy.jongwan;
+package com.ollamastudy.jongwan.config;
 
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
@@ -16,7 +16,9 @@ public class ChatClientConfig {
         return chatClientBuilder
                 .defaultSystem("You are an English tutor. Your job is to help a Korean student improve their English."+
                         "Correct the following sentence and give a brief explanation if needed.")
-                .build();
+                .defaultAdvisors(
+                        MessageChatMemoryAdvisor.builder(chatMemory()).build(),
+                        new SimpleLoggerAdvisor()).build();
     }
 
     @Bean

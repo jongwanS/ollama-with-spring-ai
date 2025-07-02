@@ -23,15 +23,21 @@ repositories {
 }
 
 dependencies {
+	//spring web
 	implementation 'org.springframework.boot:spring-boot-starter'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 
-	// Ollama 용 spring-ai starter (stable 1.0.0)
+	//ollama
 	implementation 'org.springframework.ai:spring-ai-starter-model-ollama'
+	implementation 'org.springframework.ai:spring-ai-starter-vector-store-redis'
 
+	implementation 'org.apache.pdfbox:pdfbox:2.0.29' // PDF parsing
+
+	//lombok
 	annotationProcessor 'org.projectlombok:lombok:1.18.30'
 	compileOnly 'org.projectlombok:lombok:1.18.30'
 
+	//junit
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
