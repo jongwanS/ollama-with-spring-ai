@@ -1,6 +1,7 @@
 package com.ollamastudy.jongwan.config;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.text.PDFTextStripper;
 import org.springframework.ai.document.Document;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 @Component
 @RequiredArgsConstructor
+@Log4j2
 public class DocumentLoader {
 
     private final RedisVectorStore vectorStore;
@@ -25,11 +27,11 @@ public class DocumentLoader {
                 .filter(s -> !s.isBlank())
                 .map(sentence -> new Document(sentence, Map.of("source", "example.txt")))
                 .toList();
-
         vectorStore.accept(documents);
-        extracted(documents);
+        //extracted(documents);
     }
 
+    @Deprecated
     private void extracted(List<Document> documents) {
         List<Document> documentsd = Arrays.asList(
                 new Document("Grammar helps you structure sentences correctly."),
@@ -38,10 +40,12 @@ public class DocumentLoader {
         );
         vectorStore.accept(documentsd); // 저장
 
-        List<Document> result = vectorStore.similaritySearch("Why is grammar important?");
-        System.out.println("검색된 문서 수: " + result.size());
+        //List<Document> result = vectorStore.similaritySearch("Why is grammar important?");
+        //How To improve your English
+        List<Document> result = vectorStore.similaritySearch("How To improve your English");
+        log.info("검색된 문서 수: {}", result.size());
         for (Document doc : result) {
-            System.out.println("유사 문서: " + doc.getText());
+            log.info("유사 문서: {}", doc.getText());
         }
     }
 

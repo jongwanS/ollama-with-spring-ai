@@ -32,6 +32,12 @@ curl -X POST http://localhost:8080/chat \
      --data "face"
      
 curl "http://localhost:8080/ask?q=most%20widely%20spoken%20languages%20in%20the%20world"
+
+
+
+curl -X POST http://localhost:8080/chat/eng-tutor \
+     -H "Content-Type: text/plain" \
+     --data "i want to be fluent at englisaah"
 ````
 ### 4. 유사도
 - 매커니즘을 제대로 모르겠음. 임베딩을 하는데 어떤기준으로 임베딩을 하는지...?
