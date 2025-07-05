@@ -1,6 +1,5 @@
-package com.ollamastudy.jongwan;
+package com.ollamastudy.jongwan.application;
 
-import lombok.AllArgsConstructor;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.model.ChatResponse;
 import org.springframework.ai.chat.prompt.PromptTemplate;
