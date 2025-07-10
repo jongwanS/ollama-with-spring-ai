@@ -42,6 +42,8 @@ public class RagController {
         // 병렬 처리
         documentLoader.loadFromPdfParallel(pdfBytes);
 
+        //순차 처리 - 시간비교해보기
+        //documentLoader.loadEachPageFromPdf(pdfBytes);
         return "ok";
     }
 }

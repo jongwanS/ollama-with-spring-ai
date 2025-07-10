@@ -72,6 +72,22 @@ public class DocumentLoader {
         vectorStore.accept(documents);
     }
 
+    public void loadEachPageFromPdf(byte[] pdfBytes) throws IOException {
+        try (PDDocument document = PDDocument.load(new ByteArrayInputStream(pdfBytes))) {
+            PDFTextStripper stripper = new PDFTextStripper();
+            int pageCount = document.getNumberOfPages();
+
+            for (int i = 1; i <= pageCount; i++) {
+                stripper.setStartPage(i);
+                stripper.setEndPage(i);
+                String text = stripper.getText(document);
+
+                // 각 페이지의 텍스트를 처리 (예: 벡터 임베딩 등)
+                loadFromTxt(text, "System Design Interview.pdf - Page " + i);
+            }
+        }
+    }
+
     public void loadFromPdfParallel(byte[] pdfBytes) throws IOException {
         try (PDDocument document = PDDocument.load(new ByteArrayInputStream(pdfBytes))) {
             int pageCount = document.getNumberOfPages();
