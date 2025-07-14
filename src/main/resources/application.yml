@@ -7,7 +7,7 @@ spring:
     ollama:
       base-url: http://localhost:11434  # Ollama 서버 실행 중이어야 함
       chat:
-        model: llama3.2  # 설치된 모델 이름 (예: llama3, mistral, phi)
+        model: openhermes #openhermes # llama3.2  # 설치된 모델 이름 (예: llama3, mistral, phi)
       embedding:
         model: nomic-embed-text  # ← 여기를 추가!
     vectorstore:

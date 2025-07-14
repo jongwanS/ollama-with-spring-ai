@@ -23,13 +23,17 @@ public class ChatController {
 
     private final ChatClient chatClient;
 
+    private final PromptTemplate template;
 
     public ChatController(
             VectorStore vectorStore
             , @Qualifier("meanChatClient") ChatClient chatClient) {
         this.vectorStore = vectorStore;
         this.chatClient = chatClient;
+        this.template = new PromptTemplate(new ClassPathResource("prompts/english-tutor-friend.st")); // 파일 경로
     }
+
+
 
     @PostMapping
     public ResponseEntity<String> chat(@RequestBody String message) {
@@ -48,6 +52,27 @@ public class ChatController {
         PromptTemplate template = new PromptTemplate(
                 new ClassPathResource("prompts/english-tutor.st") // 파일 경로
         );
+
+        // 2. userInput 바인딩
+        String renderedPrompt = template.render(Map.of("userInput", message));
+
+        // 3. 렌더링된 프롬프트로 메시지 생성 후 요청
+        ChatResponse chatResponse = chatClient.prompt()
+                .user(renderedPrompt)
+                .call()
+                .chatResponse();
+
+        String res = chatResponse.getResult().getOutput().getText();
+        return ResponseEntity.ok(res);
+    }
+
+    @PostMapping("/eng-friend-tutor")
+    public ResponseEntity<String> friendTutor(@RequestBody String message) {
+
+        // 1. 템플릿 경로 기반 PromptTemplate 생성
+//        PromptTemplate template = new PromptTemplate(
+//                new ClassPathResource("prompts/english-tutor-friend.st") // 파일 경로
+//        );
 
         // 2. userInput 바인딩
         String renderedPrompt = template.render(Map.of("userInput", message));
