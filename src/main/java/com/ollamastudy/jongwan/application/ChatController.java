@@ -30,7 +30,7 @@ public class ChatController {
             , @Qualifier("chatClient") ChatClient chatClient) {
         this.vectorStore = vectorStore;
         this.chatClient = chatClient;
-        this.template = new PromptTemplate(new ClassPathResource("prompts/english-tutor-friend.st")); // 파일 경로
+        this.template = new PromptTemplate(new ClassPathResource("prompts/english-tutor-with-alternative-answer.st")); // 파일 경로
     }
 
 
