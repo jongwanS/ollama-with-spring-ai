@@ -27,7 +27,7 @@ public class ChatController {
 
     public ChatController(
             VectorStore vectorStore
-            , @Qualifier("meanChatClient") ChatClient chatClient) {
+            , @Qualifier("chatClient") ChatClient chatClient) {
         this.vectorStore = vectorStore;
         this.chatClient = chatClient;
         this.template = new PromptTemplate(new ClassPathResource("prompts/english-tutor-friend.st")); // 파일 경로

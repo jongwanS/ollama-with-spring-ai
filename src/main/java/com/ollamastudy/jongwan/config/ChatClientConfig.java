@@ -31,6 +31,15 @@ public class ChatClientConfig {
     }
 
     @Bean
+    public ChatClient chatClient(ChatClient.Builder chatClientBuilder) {
+        return chatClientBuilder
+                .defaultSystem("you are an chatterbox person")
+                .defaultAdvisors(
+                        MessageChatMemoryAdvisor.builder(chatMemory()).build(),
+                        new SimpleLoggerAdvisor()).build();
+    }
+
+    @Bean
     public ChatClient friendChatClient(ChatClient.Builder chatClientBuilder) {
         return chatClientBuilder
                 .defaultSystem("you are a friend")
